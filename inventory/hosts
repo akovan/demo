@@ -1,0 +1,13 @@
+[democloud:children]
+docker_nodes
+
+[docker_nodes:children]
+swarm_managers
+swarm_workers
+
+[swarm_managers]
+node01 ansible_ssh_host=203.0.113.51 ansible_user=ubuntu
+
+[swarm_workers]
+node02 ansible_ssh_host=203.0.113.52 ansible_user=ubuntu
+node03 ansible_ssh_host=203.0.113.53 ansible_user=ubuntu

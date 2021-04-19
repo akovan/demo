@@ -1,0 +1,13 @@
+---
+  - name: Create instance
+    openstack.cloud.server:
+      state: present
+      auth: "{{ auth }}"
+      name: "{{ inventory_hostname }}"
+      flavor: "{{ openstack.flavor }}"
+      root_volume: "{{ inventory_hostname }}_root"
+      key_name: "{{ openstack.key_name }}"
+      nics: "{{ ports }}"
+      meta:
+        hostname: "{{ inventory_hostname }}"
+    delegate_to: localhost

@@ -1,0 +1,15 @@
+---
+- name: Add nodes to /etc/hosts
+  lineinfile: path=/etc/hosts regexp='.*{{ item }}$' line="{{ hostvars[item].ansible_default_ipv4.address }} {{item}}" state=present
+  when: hostvars[item].ansible_default_ipv4.address is defined
+  with_items: "{{ groups['docker_nodes'] }}"
+
+- name: Install packages
+  apt: 
+    name: 
+      - python3-pip
+      - wget
+      - openssl
+      - curl
+    state: latest 
+    update_cache: yes

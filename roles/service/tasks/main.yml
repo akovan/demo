@@ -1,0 +1,4 @@
+---
+  - include_tasks: service_configure.yml
+  - include_tasks: stacks/front.yml
+  - include_tasks: stacks/app.yml

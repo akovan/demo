@@ -1,0 +1,50 @@
+---
+  - name: Deploy Openstack instances
+    hosts: democloud
+    gather_facts: no
+    roles:
+      - openstack
+    tags: deploy_instances
+
+  - name: Common tasks
+    hosts: democloud
+    become: yes
+    roles:
+      - common
+    tags: deploy_common
+
+  - name: Install docker
+    hosts: docker_nodes
+    become: yes
+    roles:
+      - docker
+    tags: deploy_docker
+
+  - name: Init Docker Swarm
+    hosts: swarm_managers
+    become: yes
+    roles:
+      - swarm/init
+    tags: deploy_swarm
+
+  - name: Add Docker Swarm managers
+    hosts: swarm_managers
+    become: yes
+    roles:
+      - swarm/add-manager
+    tags: deploy_swarm
+
+  - name: Add Docker Swarm workers
+    hosts: swarm_workers
+    become: yes
+    roles:
+      - swarm/add-worker
+    tags: deploy_swarm
+
+  - name: Deploy services
+    hosts: swarm_managers
+    become: yes
+    roles:
+      - service
+    run_once: yes
+    tags: deploy_services

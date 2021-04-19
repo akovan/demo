@@ -1,0 +1,7 @@
+auth:
+  auth_url: http://controller:5000/v3/
+  username: "demo"
+  password: "openstack"
+  project_id: "adef78ac04924cb1b9062d10f7a721f2"
+  project_name: "demo-cloud"
+  user_domain_name: "Default"

@@ -1,0 +1,19 @@
+---
+  - name: Create interfaces
+    openstack.cloud.os_port:
+      state: present
+      auth: "{{ auth }}"
+      name: "{{ inventory_hostname }}_nic{{ index }}"
+      network: "{{ item.net_name }}"
+      fixed_ips:
+        - ip_address: "{{ item.ip_addr }}"
+    loop: "{{ openstack.interfaces }}"
+    loop_control:
+      index_var: index
+    register: interfaces_list
+    delegate_to: localhost
+
+  - name: Create dict of nics
+    set_fact:
+      ports: "[{% for item in interfaces_list.results %}{{ ports|default({}) | combine( { \"port-name\": item.port.name} ) }},{% endfor %}]"
+    when: interfaces_list.results is defined

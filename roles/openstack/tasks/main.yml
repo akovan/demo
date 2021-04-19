@@ -1,0 +1,4 @@
+---
+  - include_tasks: openstack-create-interfaces.yml
+  - include_tasks: openstack-create-root-disk.yml
+  - include_tasks: openstack-create-instance.yml

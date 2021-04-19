@@ -1,0 +1,12 @@
+---
+  - name: Create root disk
+    openstack.cloud.volume:
+      state: present
+      auth: "{{ auth }}"
+      display_name: "{{ inventory_hostname }}_root"
+      image: "{{ openstack.image }}"
+      volume_type: "{{ openstack.volume_type }}"
+      size: "{{ openstack.root_disk_size }}"
+      bootable: yes
+      timeout: 300
+    delegate_to: localhost

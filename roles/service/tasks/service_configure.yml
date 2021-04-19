@@ -1,0 +1,5 @@
+---
+  - name: Create 'traefik' network
+    docker_network:
+      name: traefik
+      driver: overlay

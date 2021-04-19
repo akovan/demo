@@ -1,0 +1,9 @@
+openstack:
+  image: "78c64966-c802-4aff-af21-d328a86c6d09"
+  key_name: "demo-cloud"
+  flavor: "cpu_2_ram_2"
+  volume_type: "__DEFAULT__"
+  root_disk_size: 10
+  interfaces:
+    - net_name: "provider"
+      ip_addr: "203.0.113.52"
